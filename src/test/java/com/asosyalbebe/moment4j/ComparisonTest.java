@@ -819,4 +819,175 @@ public class ComparisonTest {
 	assertTrue(m1.isSameOrAfter(m4.valueOf(), Calendar.DATE));
 	assertTrue(m1.isSameOrAfter(m4.valueOf(), Calendar.MONTH));
     }
+
+    @Test
+    public void test_isBetween_MomentParams() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.DATE);
+	Moment m3 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isBetween(m2, m3));
+	assertFalse(m2.isBetween(m1, m3));
+	assertFalse(m3.isBetween(m2, m1));
+    }
+
+    @Test
+    public void test_isBetween_DateParams() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.DATE);
+	Moment m3 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isBetween(m2.toDate(), m3.toDate()));
+	assertFalse(m2.isBetween(m1.toDate(), m3.toDate()));
+	assertFalse(m3.isBetween(m2.toDate(), m1.toDate()));
+    }
+
+    @Test
+    public void test_isBetween_CalendarParams() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.DATE);
+	Moment m3 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isBetween(m2.toCalendar(), m3.toCalendar()));
+	assertFalse(m2.isBetween(m1.toCalendar(), m3.toCalendar()));
+	assertFalse(m3.isBetween(m2.toCalendar(), m1.toCalendar()));
+    }
+
+    @Test
+    public void test_isBetween_LongParams() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.DATE);
+	Moment m3 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isBetween(m2.valueOf(), m3.valueOf()));
+	assertFalse(m2.isBetween(m1.valueOf(), m3.valueOf()));
+	assertFalse(m3.isBetween(m2.valueOf(), m1.valueOf()));
+    }
+
+    @Test
+    public void test_isBetween_MomentParams_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.MONTH);
+
+	assertTrue(m1.isBetween(m2, m3, Calendar.MONTH));
+	assertFalse(m2.isBetween(m1, m3, Calendar.MONTH));
+	assertFalse(m3.isBetween(m2, m1, Calendar.MONTH));
+	assertFalse(m1.isBetween(m2, m3, Calendar.YEAR));
+    }
+
+    @Test
+    public void test_isBetween_DateParams_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.MONTH);
+
+	assertTrue(m1.isBetween(m2.toDate(), m3.toDate(), Calendar.MONTH));
+	assertFalse(m2.isBetween(m1.toDate(), m3.toDate(), Calendar.MONTH));
+	assertFalse(m3.isBetween(m2.toDate(), m1.toDate(), Calendar.MONTH));
+	assertFalse(m1.isBetween(m2.toDate(), m3.toDate(), Calendar.YEAR));
+    }
+
+    @Test
+    public void test_isBetween_CalendarParams_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.MONTH);
+
+	assertTrue(m1.isBetween(m2.toCalendar(), m3.toCalendar(), Calendar.MONTH));
+	assertFalse(m2.isBetween(m1.toCalendar(), m3.toCalendar(), Calendar.MONTH));
+	assertFalse(m3.isBetween(m2.toCalendar(), m1.toCalendar(), Calendar.MONTH));
+	assertFalse(m1.isBetween(m2.toCalendar(), m3.toCalendar(), Calendar.YEAR));
+    }
+
+    @Test
+    public void test_isBetween_LongParams_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).subtract(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.MONTH);
+
+	assertTrue(m1.isBetween(m2.valueOf(), m3.valueOf(), Calendar.MONTH));
+	assertFalse(m2.isBetween(m1.valueOf(), m3.valueOf(), Calendar.MONTH));
+	assertFalse(m3.isBetween(m2.valueOf(), m1.valueOf(), Calendar.MONTH));
+	assertFalse(m1.isBetween(m2.valueOf(), m3.valueOf(), Calendar.YEAR));
+    }
+
+    @Test
+    public void test_isLeapYear_InstanceMethod() {
+	Moment m = moment();
+
+	// Divide by 4 rule
+	assertTrue(m.years(2012).isLeapYear());
+	assertTrue(m.years(2016).isLeapYear());
+	assertFalse(m.years(2013).isLeapYear());
+	assertFalse(m.years(2015).isLeapYear());
+
+	// Divide by 100 rule
+	assertFalse(m.years(1900).isLeapYear());
+	assertFalse(m.years(2100).isLeapYear());
+
+	// Divide by 400 rule
+	assertTrue(m.years(2000).isLeapYear());
+	assertTrue(m.years(2400).isLeapYear());
+    }
+
+    @Test
+    public void test_isLeapYear_ClassMethod() {
+	// Divide by 4 rule
+	assertTrue(Moment.isLeapYear(2012));
+	assertTrue(Moment.isLeapYear(2016));
+	assertFalse(Moment.isLeapYear(2013));
+	assertFalse(Moment.isLeapYear(2015));
+
+	// Divide by 100 rule
+	assertFalse(Moment.isLeapYear(1900));
+	assertFalse(Moment.isLeapYear(2100));
+
+	// Divide by 400 rule
+	assertTrue(Moment.isLeapYear(2000));
+	assertTrue(Moment.isLeapYear(2400));
+    }
+
+    @Test
+    public void test_equals_and_hashCode() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(date, dateFormat);
+
+	assertEquals(m1.hashCode(), m2.hashCode());
+	assertTrue(m1.equals(m2));
+	assertTrue(m2.equals(m1));
+
+	assertTrue(m1.equals(m1));
+	assertFalse(m1.equals(null));
+
+	assertFalse(m1.equals(m2.toDate()));
+	assertFalse(m1.equals(m2.toDate()));
+    }
 }
