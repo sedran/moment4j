@@ -565,4 +565,128 @@ public class ComparisonTest {
 	assertFalse(m1.isSame(m2.valueOf(), Calendar.MINUTE));
     }
 
+    @Test
+    public void test_isSameOrBefore_MomentParam() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1);
+	Moment m3 = moment(m1).add(1, Calendar.HOUR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2));
+	assertTrue(m1.isSameOrBefore(m3));
+	assertFalse(m1.isSameOrBefore(m4));
+    }
+
+    @Test
+    public void test_isSameOrBefore_DateParam() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1);
+	Moment m3 = moment(m1).add(1, Calendar.HOUR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.toDate()));
+	assertTrue(m1.isSameOrBefore(m3.toDate()));
+	assertFalse(m1.isSameOrBefore(m4.toDate()));
+    }
+
+    @Test
+    public void test_isSameOrBefore_CalendarParam() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1);
+	Moment m3 = moment(m1).add(1, Calendar.HOUR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.toCalendar()));
+	assertTrue(m1.isSameOrBefore(m3.toCalendar()));
+	assertFalse(m1.isSameOrBefore(m4.toCalendar()));
+    }
+
+    @Test
+    public void test_isSameOrBefore_LongParam() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1);
+	Moment m3 = moment(m1).add(1, Calendar.HOUR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.valueOf()));
+	assertTrue(m1.isSameOrBefore(m3.valueOf()));
+	assertFalse(m1.isSameOrBefore(m4.valueOf()));
+    }
+
+    @Test
+    public void test_isSameOrBefore_MomentParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.YEAR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2, Calendar.YEAR));
+	assertTrue(m1.isSameOrBefore(m3, Calendar.YEAR));
+	assertFalse(m1.isSameOrBefore(m4, Calendar.DATE));
+	assertTrue(m1.isSameOrBefore(m4, Calendar.MONTH));
+    }
+
+    @Test
+    public void test_isSameOrBefore_DateParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.YEAR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.toDate(), Calendar.YEAR));
+	assertTrue(m1.isSameOrBefore(m3.toDate(), Calendar.YEAR));
+	assertFalse(m1.isSameOrBefore(m4.toDate(), Calendar.DATE));
+	assertTrue(m1.isSameOrBefore(m4.toDate(), Calendar.MONTH));
+    }
+
+    @Test
+    public void test_isSameOrBefore_CalendarParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.YEAR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.toCalendar(), Calendar.YEAR));
+	assertTrue(m1.isSameOrBefore(m3.toCalendar(), Calendar.YEAR));
+	assertFalse(m1.isSameOrBefore(m4.toCalendar(), Calendar.DATE));
+	assertTrue(m1.isSameOrBefore(m4.toCalendar(), Calendar.MONTH));
+    }
+
+    @Test
+    public void test_isSameOrBefore_LongParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.MONTH);
+	Moment m3 = moment(m1).add(1, Calendar.YEAR);
+	Moment m4 = moment(m1).subtract(1, Calendar.DATE);
+
+	assertTrue(m1.isSameOrBefore(m2.valueOf(), Calendar.YEAR));
+	assertTrue(m1.isSameOrBefore(m3.valueOf(), Calendar.YEAR));
+	assertFalse(m1.isSameOrBefore(m4.valueOf(), Calendar.DATE));
+	assertTrue(m1.isSameOrBefore(m4.valueOf(), Calendar.MONTH));
+    }
+
 }
