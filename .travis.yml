@@ -1,1 +1,17 @@
 language: java
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "SZZ2Tept8In28180VVx6mGB+wpqTE3qWMHeURiC/4pEBtuFfaM1kj9E1lUs4MSeMMcW/ZYQhBjVXxU4MFYleDFg2VAZVwm0ejbe1ZTWCNrdm2uGxlgwo+DlJGWIBCNdcVrJPelw7HwU7BvmqQUSxGc1kugdQVo09EWLL/WIj0cmNB/f6IbV1KrQ4jUYXOyvzB5OczDz0W5vw3/fryvGfy3dk7ALr42dM9x5VkS222n7rqP7HGNkZDbdzi8Xowy5KE2kH2qVtuCku3xBUsSuJOrCookyxeo2wlEDYxlmBbRPXJki8sNEZcNWQKaOCrsglyCkHvv4gAABb+jz6hmMTuyoV/Rp41rAJ555yWVZlL7Jb8+uIH6wu6uSeORhHbmvMCYGoPhMX4mJj4QC7QvOh/xfiuyWVlOKKu4yVSBUKdLzMCMea+ZNNQpC3+kUmFiINeMUmX+pXg+Gl/WNXCxz6w8BpzKHRnp9bgq+aaS1fUFpohQC20bESPe2JtrKLCSrIj4WeHiX+nPtnbjGl9uJnyiSD7zCHhe5RxXaHO3W70OfBp9GtyS9i1ihZdQzY+0L4kTxTf80hFRrEjwYMMZZsOKmwSg0n7z0LKlfQQLE2DaswxNofbt++XXprGWfJOdZdrnKwVP4ZoIZ4E5SoLvbMsYfL/Ee/4hzzvOFwNgQM1ow="
+
+addons:
+  coverity_scan:
+    project:
+      name: "sedran/moment4j"
+      description: "Parse, validate, manipulate, and display dates in Java. A very similar API to momentjs."
+    notification_email: serdar.kuzucu@gmail.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: master
