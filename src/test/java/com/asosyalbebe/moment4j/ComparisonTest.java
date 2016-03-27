@@ -446,7 +446,7 @@ public class ComparisonTest {
     }
 
     @Test
-    public void test_MomentComparator_Positive() {
+    public void test_compareTo_Positive() {
 	Moment lhs = moment(System.currentTimeMillis() + 1000);
 	Moment rhs = moment(System.currentTimeMillis() - 1000);
 
@@ -456,13 +456,113 @@ public class ComparisonTest {
     }
 
     @Test
-    public void test_MomentComparator_Zero() {
+    public void test_compareTo_Zero() {
 	Moment lhs = moment(System.currentTimeMillis());
 	Moment rhs = moment(lhs.valueOf());
 
 	int result = lhs.compareTo(rhs);
 
 	assertThat(result, equalTo(0));
+    }
+
+    @Test
+    public void test_isSame_MomentParam() {
+	Moment m1 = moment();
+	Moment m2 = moment(m1);
+	assertTrue(m1.isSame(m2));
+
+	m2.add(1, Calendar.MILLISECOND);
+	assertFalse(m1.isSame(m2));
+    }
+
+    @Test
+    public void test_isSame_DateParam() {
+	Moment m1 = moment();
+	Moment m2 = moment(m1);
+	assertTrue(m1.isSame(m2.toDate()));
+
+	m2.add(1, Calendar.MILLISECOND);
+	assertFalse(m1.isSame(m2.toDate()));
+    }
+
+    @Test
+    public void test_isSame_CalendarParam() {
+	Moment m1 = moment();
+	Moment m2 = moment(m1);
+	assertTrue(m1.isSame(m2.toCalendar()));
+
+	m2.add(1, Calendar.MILLISECOND);
+	assertFalse(m1.isSame(m2.toCalendar()));
+    }
+
+    @Test
+    public void test_isSame_LongParam() {
+	Moment m1 = moment();
+	Moment m2 = moment(m1);
+	assertTrue(m1.isSame(m2.valueOf()));
+
+	m2.add(1, Calendar.MILLISECOND);
+	assertFalse(m1.isSame(m2.valueOf()));
+    }
+
+    @Test
+    public void test_isSame_MomentParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isSame(m2, Calendar.YEAR));
+	assertTrue(m1.isSame(m2, Calendar.MONTH));
+	assertFalse(m1.isSame(m2, Calendar.DATE));
+	assertFalse(m1.isSame(m2, Calendar.HOUR));
+	assertFalse(m1.isSame(m2, Calendar.MINUTE));
+    }
+
+    @Test
+    public void test_isSame_DateParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isSame(m2.toDate(), Calendar.YEAR));
+	assertTrue(m1.isSame(m2.toDate(), Calendar.MONTH));
+	assertFalse(m1.isSame(m2.toDate(), Calendar.DATE));
+	assertFalse(m1.isSame(m2.toDate(), Calendar.HOUR));
+	assertFalse(m1.isSame(m2.toDate(), Calendar.MINUTE));
+    }
+
+    @Test
+    public void test_isSame_CalendarParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isSame(m2.toCalendar(), Calendar.YEAR));
+	assertTrue(m1.isSame(m2.toCalendar(), Calendar.MONTH));
+	assertFalse(m1.isSame(m2.toCalendar(), Calendar.DATE));
+	assertFalse(m1.isSame(m2.toCalendar(), Calendar.HOUR));
+	assertFalse(m1.isSame(m2.toCalendar(), Calendar.MINUTE));
+    }
+
+    @Test
+    public void test_isSame_LongParam_WithCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment m1 = moment(date, dateFormat);
+	Moment m2 = moment(m1).add(1, Calendar.DATE);
+
+	assertTrue(m1.isSame(m2.valueOf(), Calendar.YEAR));
+	assertTrue(m1.isSame(m2.valueOf(), Calendar.MONTH));
+	assertFalse(m1.isSame(m2.valueOf(), Calendar.DATE));
+	assertFalse(m1.isSame(m2.valueOf(), Calendar.HOUR));
+	assertFalse(m1.isSame(m2.valueOf(), Calendar.MINUTE));
     }
 
 }
