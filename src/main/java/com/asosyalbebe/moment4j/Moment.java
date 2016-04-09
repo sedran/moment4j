@@ -256,6 +256,15 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 	return this.startOf(calendarField).add(1, calendarField).subtract(1, Calendar.MILLISECOND);
     }
 
+    public String format(String pattern) {
+	try {
+	    SimpleDateFormat format = new SimpleDateFormat(pattern);
+	    return format.format(calendar.getTime());
+	} catch (Exception e) {
+	    throw new MomentException("Parse error occurred while formatting [" + calendar + "] with SimpleDateFormat [" + pattern + "]", e);
+	}
+    }
+
     public Date toDate() {
 	return this.calendar.getTime();
     }

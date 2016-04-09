@@ -374,4 +374,18 @@ public class ManipulationTest {
 
 	assertEquals(expected.valueOf(), moment.valueOf());
     }
+
+    @Test
+    public void test_README() {
+	moment().startOf(Calendar.YEAR); // set to January 1st, 12:00 am this year
+	moment().startOf(Calendar.MONTH); // set to the first of this month, 12:00 am
+	moment().startOf(Calendar.WEEK_OF_YEAR); // set to the first day of this week, 12:00 am
+	moment().startOf(Calendar.DATE); // set to 12:00 am today
+	moment().startOf(Calendar.HOUR); // set to now, but with 0 mins, 0 secs, and 0 ms
+	moment().startOf(Calendar.MONTH); // set to now, but with 0 seconds and 0 milliseconds
+	moment().startOf(Calendar.SECOND); // same as moment().milliseconds(0);
+
+	moment().startOf(Calendar.YEAR);
+	moment().months(0).dates(1).hours(0).minutes(0).seconds(0).milliseconds(0);
+    }
 }
