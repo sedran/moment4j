@@ -488,8 +488,8 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * TODO Write JavaDoc
-     * @return
+     * 
+     * @return the array of values
      */
     public int[] toArray() {
 	int[] array = new int[7];
@@ -531,6 +531,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Creates a new Moment instance by copying this Moment instance's time value.
      * 
      * @return a new Moment instance which is created by copying this Moment instance's time value.
+     * @see Moment#moment(Moment)
      */
     @Override
     public Moment clone() {
@@ -589,182 +590,641 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 	return this.valueOf() < milliseconds;
     }
 
+    /**
+     * Returns true if this moment instance is before the specified moment instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param moment moment instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before the specified moment instance with the given precision.
+     * @see java.util.Date#before(Date)
+     */
     public boolean isBefore(Moment moment, int calendarField) {
 	return isBefore(moment.valueOf(), calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param date date instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before the specified date instance with the given precision.
+     * @see java.util.Date#before(Date)
+     */
     public boolean isBefore(Date date, int calendarField) {
 	return isBefore(date.getTime(), calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before the specified calendar instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param calendar calendar instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before the specified calendar instance with the given precision.
+     * @see java.util.Date#before(Date)
+     */
     public boolean isBefore(Calendar calendar, int calendarField) {
 	return isBefore(calendar.getTime(), calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before the specified time as UTC milliseconds from the epoch with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before the specified time as UTC milliseconds from the epoch with the given precision.
+     * @see java.util.Date#before(Date)
+     */
     public boolean isBefore(long milliseconds, int calendarField) {
 	return this.clone().endOf(calendarField).isBefore(milliseconds);
     }
 
+    /**
+     * Returns true if this moment instance is after the specified moment instance
+     *  
+     * @param moment moment to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly later than the instant represented by the given moment parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Moment moment) {
 	return isAfter(moment.valueOf());
     }
 
+    /**
+     * Returns true if this moment instance is after the specified date instance
+     *  
+     * @param date date to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly later than the instant represented by the given date parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Date date) {
 	return isAfter(date.getTime());
     }
 
+    /**
+     * Returns true if this moment instance is after the specified calendar instance
+     *  
+     * @param calendar calendar to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly later than the instant represented by the given calendar parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Calendar calendar) {
 	return isAfter(calendar.getTimeInMillis());
     }
 
+    /**
+     * Returns true if this moment instance is after the specified time as UTC milliseconds from the epoch
+     *  
+     * @param milliseconds time as UTC milliseconds from the epoch to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly later than the instant represented by the given time as UTC milliseconds from the epoch;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(long milliseconds) {
 	return this.valueOf() > milliseconds;
     }
 
+    /**
+     * Returns true if this moment instance is after the specified moment instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param moment moment instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after the specified moment instance with the given precision.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Moment moment, int calendarField) {
 	return isAfter(moment.valueOf(), calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param date date instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after the specified date instance with the given precision.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Date date, int calendarField) {
 	return isAfter(date.getTime(), calendarField);
     }
 
+    /**
+     * Returns true if this calendar instance is after the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param calendar calendar instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after the specified calendar instance with the given precision.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(Calendar calendar, int calendarField) {
 	return isAfter(calendar.getTimeInMillis(), calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after the specified time as UTC milliseconds from the epoch with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after the specified time as UTC milliseconds from the epoch with the given precision.
+     * @see java.util.Date#after(Date)
+     */
     public boolean isAfter(long milliseconds, int calendarField) {
 	return this.clone().startOf(calendarField).isAfter(milliseconds);
     }
 
-    public int compareTo(Moment o) {
-	return Long.compare(this.valueOf(), o.valueOf());
+    /**
+     * Compares this object with the specified object for order. Returns a negative integer, zero, or a positive 
+     * integer as this moment instance is before, equal to, or after the specified moment instance.
+     * 
+     * @param moment the moment instance to compare to this moment instance
+     * @return a negative integer, zero, or a positive integer as this moment instance is before, equal to, or after the specified moment instance. 
+     * @see java.lang.Comparable#compareTo(Object)
+     * @see Moment#isAfter(Moment)
+     * @see Moment#isBefore(Moment)
+     * @see Moment#isSame(Moment)
+     */
+    public int compareTo(Moment moment) {
+	return Long.compare(this.valueOf(), moment.valueOf());
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified moment instance
+     *  
+     * @param moment moment to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly the same as the instant represented by the given moment parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Moment moment) {
 	return isSame(moment.valueOf());
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified date instance
+     *  
+     * @param date date to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly the same as the instant represented by the given date parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Date date) {
 	return isSame(date.getTime());
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified calendar instance
+     *  
+     * @param calendar calendar to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly the same as the instant represented by the given calendar parameter;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Calendar calendar) {
 	return isSame(calendar.getTimeInMillis());
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified time as UTC milliseconds from the epoch
+     *  
+     * @param milliseconds time as UTC milliseconds from the epoch to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is strictly the same as the instant represented by the given time as UTC milliseconds from the epoch;
+     * <code>false</code> otherwise.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(long milliseconds) {
 	return this.valueOf() == milliseconds;
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified moment instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param moment moment instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is the same as the specified moment instance with the given precision.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Moment moment, int calendarField) {
 	return this.clone().startOf(calendarField).isSame(moment.clone().startOf(calendarField));
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param date date instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is the same as the specified date instance with the given precision.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Date date, int calendarField) {
 	return this.clone().startOf(calendarField).isSame(moment(date).startOf(calendarField));
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified calendar instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param calendar calendar instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is the same as the specified calendar instance with the given precision.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(Calendar calendar, int calendarField) {
 	return this.clone().startOf(calendarField).isSame(moment(calendar).startOf(calendarField));
     }
 
+    /**
+     * Returns true if this moment instance is the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is the same as the specified time as UTC milliseconds from the epoch with the given precision.
+     * @see java.util.Date#equals(Object)
+     */
     public boolean isSame(long milliseconds, int calendarField) {
 	return this.clone().startOf(calendarField).isSame(moment(milliseconds).startOf(calendarField));
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified moment instance
+     *  
+     * @param moment moment to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is before or the same as the instant represented by the given moment parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isBefore(Moment)
+     * @see Moment#isSame(Moment)
+     */
     public boolean isSameOrBefore(Moment moment) {
 	return isBefore(moment) || isSame(moment);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified date instance
+     *  
+     * @param date date to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is before or the same as the instant represented by the given date parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isBefore(Date)
+     * @see Moment#isSame(Date)
+     */
     public boolean isSameOrBefore(Date date) {
 	return isBefore(date) || isSame(date);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified calendar instance
+     *  
+     * @param calendar calendar to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is before or the same as the instant represented by the given calendar parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isBefore(Calendar)
+     * @see Moment#isSame(Calendar)
+     */
     public boolean isSameOrBefore(Calendar calendar) {
 	return isBefore(calendar) || isSame(calendar);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch
+     *  
+     * @param milliseconds time as UTC milliseconds from the epoch to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is before or the same as the instant represented by the given time as UTC milliseconds from the epoch;
+     * <code>false</code> otherwise.
+     * @see Moment#isBefore(long)
+     * @see Moment#isSame(long)
+     */
     public boolean isSameOrBefore(long milliseconds) {
 	return isBefore(milliseconds) || isSame(milliseconds);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified moment instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param moment moment instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before or the same as the specified moment instance with the given precision.
+     * @see Moment#isBefore(Moment, int)
+     * @see Moment#isSame(Moment, int)
+     */
     public boolean isSameOrBefore(Moment moment, int calendarField) {
 	return isBefore(moment, calendarField) || isSame(moment, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param date date instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before or the same as the specified date instance with the given precision.
+     * @see Moment#isBefore(Date, int)
+     * @see Moment#isSame(Date, int)
+     */
     public boolean isSameOrBefore(Date date, int calendarField) {
 	return isBefore(date, calendarField) || isSame(date, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified calendar instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param calendar calendar instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before or the same as the specified calendar instance with the given precision.
+     * @see Moment#isBefore(Calendar, int)
+     * @see Moment#isSame(Calendar, int)
+     */
     public boolean isSameOrBefore(Calendar calendar, int calendarField) {
 	return isBefore(calendar, calendarField) || isSame(calendar, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch with the given precision.
+     * @see Moment#isBefore(long, int)
+     * @see Moment#isSame(long, int)
+     */
     public boolean isSameOrBefore(long milliseconds, int calendarField) {
 	return isBefore(milliseconds, calendarField) || isSame(milliseconds, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified moment instance
+     *  
+     * @param moment moment to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is after or the same as the instant represented by the given moment parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isAfter(Moment)
+     * @see Moment#isSame(Moment)
+     */
     public boolean isSameOrAfter(Moment moment) {
 	return isAfter(moment) || isSame(moment);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified date instance
+     *  
+     * @param date date to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is after or the same as the instant represented by the given date parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isAfter(Date)
+     * @see Moment#isSame(Date)
+     */
     public boolean isSameOrAfter(Date date) {
 	return isAfter(date) || isSame(date);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified calendar instance
+     *  
+     * @param calendar calendar to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is after or the same as the instant represented by the given calendar parameter;
+     * <code>false</code> otherwise.
+     * @see Moment#isAfter(Calendar)
+     * @see Moment#isSame(Calendar)
+     */
     public boolean isSameOrAfter(Calendar calendar) {
 	return isAfter(calendar) || isSame(calendar);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch
+     *  
+     * @param milliseconds time as UTC milliseconds from the epoch to check
+     * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
+     * object is after or the same as the instant represented by the given time as UTC milliseconds from the epoch;
+     * <code>false</code> otherwise.
+     * @see Moment#isAfter(long)
+     * @see Moment#isSame(long)
+     */
     public boolean isSameOrAfter(long milliseconds) {
 	return isAfter(milliseconds) || isSame(milliseconds);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified moment instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param moment moment instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after or the same as the specified moment instance with the given precision.
+     * @see Moment#isAfter(Moment, int)
+     * @see Moment#isSame(Moment, int)
+     */
     public boolean isSameOrAfter(Moment moment, int calendarField) {
 	return isAfter(moment, calendarField) || isSame(moment, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified date instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param date date instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after or the same as the specified date instance with the given precision.
+     * @see Moment#isAfter(Date, int)
+     * @see Moment#isSame(Date, int)
+     */
     public boolean isSameOrAfter(Date date, int calendarField) {
 	return isAfter(date, calendarField) || isSame(date, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified calendar instance with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param calendar calendar instance to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after or the same as the specified calendar instance with the given precision.
+     * @see Moment#isAfter(Calendar, int)
+     * @see Moment#isSame(Calendar, int)
+     */
     public boolean isSameOrAfter(Calendar calendar, int calendarField) {
 	return isAfter(calendar, calendarField) || isSame(calendar, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
+     * 
+     * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch with the given precision.
+     * @see Moment#isAfter(long, int)
+     * @see Moment#isSame(long, int)
+     */
     public boolean isSameOrAfter(long milliseconds, int calendarField) {
 	return isAfter(milliseconds, calendarField) || isSame(milliseconds, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two moment instances.
+     * <p>
+     * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * @param from moment instance to check if this moment instance is after
+     * @param to moment instance to check if this moment instance is before
+     * @return true if this moment instance is between the given two moment instances.
+     * @see Moment#isAfter(Moment)
+     * @see Moment#isBefore(Moment)
+     */
     public boolean isBetween(Moment from, Moment to) {
 	return isAfter(from) && isBefore(to);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two date instances.
+     * <p>
+     * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * @param from date instance to check if this moment instance is after
+     * @param to date instance to check if this moment instance is before
+     * @return true if this moment instance is between the given two date instances.
+     * @see Moment#isAfter(Date)
+     * @see Moment#isBefore(Date)
+     */
     public boolean isBetween(Date from, Date to) {
 	return isAfter(from) && isBefore(to);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two calendar instances.
+     * <p>
+     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * @param from calendar instance to check if this moment instance is after
+     * @param to calendar instance to check if this moment instance is before
+     * @return true if this moment instance is between the given two calendar instances.
+     * @see Moment#isAfter(Calendar)
+     * @see Moment#isBefore(Calendar)
+     */
     public boolean isBetween(Calendar from, Calendar to) {
 	return isAfter(from) && isBefore(to);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two times as UTC milliseconds from the epoch.
+     * <p>
+     * A moment instance is between the two milliseconds <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * @param fromMillis time as UTC milliseconds from the epoch to check if this moment instance is after
+     * @param toMillis time as UTC milliseconds from the epoch to check if this moment instance is before
+     * @return true if this moment instance is between the given two times as UTC milliseconds from the epoch.
+     * @see Moment#isAfter(long)
+     * @see Moment#isBefore(long)
+     */
     public boolean isBetween(long fromMillis, long toMillis) {
 	return isAfter(fromMillis) && isBefore(toMillis);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two moment instances with the given precision.
+     * <p>
+     * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * @param from moment instance to check if this moment instance is after
+     * @param to moment instance to check if this moment instance is before
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is between the given two moment instances with the given precision.
+     * @see Moment#isAfter(Moment, int)
+     * @see Moment#isBefore(Moment, int)
+     */
     public boolean isBetween(Moment from, Moment to, int calendarField) {
 	return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two date instances with the given precision.
+     * <p>
+     * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * @param from date instance to check if this moment instance is after
+     * @param to date instance to check if this moment instance is before
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is between the given two date instances with the given precision.
+     * @see Moment#isAfter(Date, int)
+     * @see Moment#isBefore(Date, int)
+     */
     public boolean isBetween(Date from, Date to, int calendarField) {
 	return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two calendar instances with the given precision.
+     * <p>
+     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * @param from calendar instance to check if this moment instance is after
+     * @param to calendar instance to check if this moment instance is before
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is between the given two calendar instances with the given precision.
+     * @see Moment#isAfter(Calendar, int)
+     * @see Moment#isBefore(Calendar, int)
+     */
     public boolean isBetween(Calendar from, Calendar to, int calendarField) {
 	return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
+    /**
+     * Returns true if this moment instance is between the given two times as UTC milliseconds from the epoch with the given precision.
+     * <p>
+     * A moment instance is between the two times as UTC milliseconds from the epoch <code>from</code> and <code>to</code> 
+     * if and only if it is after <code>from</code> and before <code>to</code>.
+     * <p>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * @param fromMillis time as UTC milliseconds from the epoch to check if this moment instance is after
+     * @param toMillis time as UTC milliseconds from the epoch to check if this moment instance is before
+     * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
+     * @return true if this moment instance is between the given two times as UTC milliseconds from the epoch with the given precision.
+     * @see Moment#isAfter(long, int)
+     * @see Moment#isBefore(long, int)
+     */
     public boolean isBetween(long fromMillis, long toMillis, int calendarField) {
 	return isAfter(fromMillis, calendarField) && isBefore(toMillis, calendarField);
     }
@@ -807,6 +1267,14 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 	return this;
     }
 
+    /**
+     * Returns the maximum (most distant future) of the given moment instances.
+     * @param moments moment instances to compare in order to find the maximum (most distant future) one.
+     * @return the maximum (most distant future) of the given moment instances. 
+     * If the given <code>moments</code> parameter is null or empty, returns the current date.
+     * @see Moment#compareTo(Moment)
+     * @see Moment#min(Moment...)
+     */
     public static Moment max(Moment... moments) {
 	if (moments == null || moments.length == 0) {
 	    return moment();
@@ -822,6 +1290,14 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 	return max;
     }
 
+    /**
+     * Returns the minimum (most distant past) of the given moment instances.
+     * @param moments moment instances to compare in order to find the minimum (most distant past) one.
+     * @return the minimum (most distant past) of the given moment instances. 
+     * If the given <code>moments</code> parameter is null or empty, returns the current date.
+     * @see Moment#compareTo(Moment)
+     * @see Moment#max(Moment...)
+     */
     public static Moment min(Moment... moments) {
 	if (moments == null || moments.length == 0) {
 	    return moment();
@@ -847,30 +1323,87 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
     }
 
+    /**
+     * Creates a moment instance for current time
+     * @return a new moment instance for current time
+     */
     public static Moment moment() {
 	return new Moment();
     }
 
+    /**
+     * Creates a moment instance for given date as string which will be parsed with given pattern
+     * 
+     * @param dateString date as string to be parsed and encapsulated
+     * @param pattern pattern to be used to parse the dateString
+     * @return a new moment instance for given date as string which will be parsed with given pattern
+     */
     public static Moment moment(String dateString, String pattern) {
 	return new Moment(dateString, pattern);
     }
 
+    /**
+     * Creates a moment instance by encapsulating the given calendar instance. 
+     * The given calendar is cloned. The operations on this moment have no effect on the given calendar instance.
+     * 
+     * @param calendar calendar to be cloned and encapsulated
+     * @return a new moment instance created by encapsulating the given calendar instance.
+     */
     public static Moment moment(Calendar calendar) {
 	return new Moment(calendar);
     }
 
+    /**
+     * Creates a moment instance by using the given date. The date parameter is copied. 
+     * The operations on this moment have no effect on the given date instance.
+     * 
+     * @param date date to be used by this Moment instance.
+     * @return a new moment instance created by using the given date. The date parameter is copied.
+     */
     public static Moment moment(Date date) {
 	return new Moment(date);
     }
 
+    /**
+     * Creates a moment instance by using the given time as UTC milliseconds from the epoch.
+     * 
+     * @param timeInMillis time as UTC milliseconds from the epoch.
+     * @return a new moment instance created by using the given time as UTC milliseconds from the epoch.
+     */
     public static Moment moment(long timeInMillis) {
 	return new Moment(timeInMillis);
     }
 
+    /**
+     * Creates a moment instance by using the given array of values.
+     * <p> 
+     * The array must contain exactly 7 integers, which represents years, months, days, hours, minutes, seconds, and milliseconds.
+     * <p>
+     * For example, the following code can be used to create 31/01/2015 13:32:25.125
+     * 
+     * <pre>
+     * {@code
+     * int[] arrayOfIntegers = new int[] {2015, 0, 31, 13, 32, 25, 125};
+     * Moment moment = Moment.moment(arrayOfIntegers);
+     * }
+     * </pre>
+     * 
+     * Note that the first month in Java(January) is represented by 0.
+     * 
+     * @param array array of values. The array must contain exactly 7 integers, which represents years, months, days, hours, minutes, seconds, and milliseconds.
+     * @return a new moment instance created by using the given array of values.
+     */
     public static Moment moment(int[] array) {
 	return new Moment(array);
     }
 
+    /**
+     * Creates a new Moment instance by copying the given moment instance's time value.
+     * 
+     * @param source the moment instance to be copied to the new moment instance.
+     * @return a new Moment instance which is created by copying the given instance's time value.
+     * @see Moment#clone()
+     */
     public static Moment moment(Moment source) {
 	return new Moment(source.valueOf());
     }
