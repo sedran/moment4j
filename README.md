@@ -13,6 +13,17 @@ Its API design is as similar as possible to momentjs.
 The `Moment` class is a wrapper class of `java.util.Calendar`.
 Every operation is done over the `Calendar` instance.
 
+Maven
+--------------------------------------
+
+```xml
+<dependency>
+    <groupId>com.asosyalbebe</groupId>
+    <artifactId>moment4j</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 Usage
 --------------------------------------
 
