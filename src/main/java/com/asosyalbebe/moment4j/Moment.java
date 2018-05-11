@@ -1095,7 +1095,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
      * @param from moment instance to check if this moment instance is after
      * @param to moment instance to check if this moment instance is before
      * @return true if this moment instance is between the given two moment instances.
@@ -1112,7 +1112,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
      * @param from date instance to check if this moment instance is after
      * @param to date instance to check if this moment instance is before
      * @return true if this moment instance is between the given two date instances.
@@ -1129,7 +1129,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
      * @param from calendar instance to check if this moment instance is after
      * @param to calendar instance to check if this moment instance is before
      * @return true if this moment instance is between the given two calendar instances.
@@ -1146,7 +1146,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two milliseconds <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to) == moment.isAfter(from) && moment.isBefore(to)</code>
+     * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
      * @param fromMillis time as UTC milliseconds from the epoch to check if this moment instance is after
      * @param toMillis time as UTC milliseconds from the epoch to check if this moment instance is before
      * @return true if this moment instance is between the given two times as UTC milliseconds from the epoch.
@@ -1163,7 +1163,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
      * @param from moment instance to check if this moment instance is after
      * @param to moment instance to check if this moment instance is before
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
@@ -1181,7 +1181,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
      * @param from date instance to check if this moment instance is after
      * @param to date instance to check if this moment instance is before
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
@@ -1199,7 +1199,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
      * @param from calendar instance to check if this moment instance is after
      * @param to calendar instance to check if this moment instance is before
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
@@ -1217,7 +1217,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * A moment instance is between the two times as UTC milliseconds from the epoch <code>from</code> and <code>to</code> 
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
-     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) && moment.isBefore(to, Calendar.DATE)</code>
+     * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
      * @param fromMillis time as UTC milliseconds from the epoch to check if this moment instance is after
      * @param toMillis time as UTC milliseconds from the epoch to check if this moment instance is before
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
