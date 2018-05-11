@@ -54,3 +54,5 @@ target/
 
 # Javadocs
 doc/
+
+.idea/
