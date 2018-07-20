@@ -7,7 +7,7 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
-public class ManipulationTest {
+public class MomentManipulationTest {
 
     @Test
     public void test_add() {

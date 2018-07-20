@@ -18,7 +18,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class ComparisonTest {
+public class MomentComparisonTest {
     @Test
     public void test_max_null_param() {
 	long beforeTime = moment().valueOf();
