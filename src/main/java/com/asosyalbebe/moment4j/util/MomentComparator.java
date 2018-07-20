@@ -1,4 +1,6 @@
-package com.asosyalbebe.moment4j;
+package com.asosyalbebe.moment4j.util;
+
+import com.asosyalbebe.moment4j.Moment;
 
 import java.util.Comparator;
 

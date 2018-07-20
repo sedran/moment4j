@@ -1,5 +1,7 @@
 package com.asosyalbebe.moment4j;
 
+import com.asosyalbebe.moment4j.fault.MomentException;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +12,7 @@ import java.util.Date;
  * in time, with millisecond precision.
  * <p>
  * Moment also provides a very useful set of APIs to make it easy to manipulate dates in Java.
- * 
+ *
  * @author Serdar Kuzucu
  *
  */
@@ -18,7 +20,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Internal state of the moment instance is hold on this calendar instance. 
+     * Internal state of the moment instance is hold on this calendar instance.
      * Moment does not expose this calendar instance outside.
      * Only a copy of this calendar can be retrieved from the outside of the Moment instance.
      */
@@ -33,7 +35,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance for given date as string which will be parsed with given pattern
-     * 
+     *
      * @param dateString date as string to be parsed and encapsulated
      * @param pattern pattern to be used to parse the dateString
      */
@@ -50,9 +52,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Creates a moment instance by encapsulating the given calendar instance. 
+     * Creates a moment instance by encapsulating the given calendar instance.
      * The given calendar is cloned. The operations on this moment have no effect on the given calendar instance.
-     * 
+     *
      * @param calendar calendar to be cloned and encapsulated
      */
     private Moment(Calendar calendar) {
@@ -60,9 +62,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Creates a moment instance by using the given date. The date parameter is copied. 
+     * Creates a moment instance by using the given date. The date parameter is copied.
      * The operations on this moment have no effect on the given date instance.
-     * 
+     *
      * @param date date to be used by this Moment instance.
      */
     private Moment(Date date) {
@@ -72,7 +74,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance by using the given unix timestamp
-     * 
+     *
      * @param timeInMillis
      */
     private Moment(long timeInMillis) {
@@ -82,20 +84,20 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance by using the given array of values.
-     * <p> 
+     * <p>
      * The array must contain exactly 7 integers, which represents years, months, days, hours, minutes, seconds, and milliseconds.
      * <p>
      * For example, the following code can be used to create 31/01/2015 13:32:25.125
-     * 
+     *
      * <pre>
      * {@code
      * int[] arrayOfIntegers = new int[] {2015, 0, 31, 13, 32, 25, 125};
      * Moment moment = Moment.moment(arrayOfIntegers);
      * }
      * </pre>
-     * 
+     *
      * Note that the first month in Java(January) is represented by 0.
-     * 
+     *
      * @param array
      */
     private Moment(int[] array) {
@@ -122,7 +124,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the milliseconds.
      * <p>
      * Accepts numbers from 0 to 999. If the range is exceeded, it will bubble up to the seconds.
-     * 
+     *
      * @param milliseconds milliseconds to set.
      * @return this Moment instance for chainability.
      */
@@ -132,7 +134,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the milliseconds. The returned value is always in range from 0 to 999.
-     * 
+     *
      * @return The milliseconds. The returned value is always in range from 0 to 999.
      */
     public int milliseconds() {
@@ -143,7 +145,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the seconds.
      * <p>
      * Accepts numbers from 0 to 59. If the range is exceeded, it will bubble up to the minutes.
-     * 
+     *
      * @param seconds seconds to set.
      * @return this Moment instance for chainability.
      */
@@ -153,7 +155,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the seconds. The returned value is always in range from 0 to 59.
-     * 
+     *
      * @return The seconds. The returned value is always in range from 0 to 59.
      */
     public int seconds() {
@@ -164,7 +166,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the minutes.
      * <p>
      * Accepts numbers from 0 to 59. If the range is exceeded, it will bubble up to the hours.
-     * 
+     *
      * @param minutes minutes to set.
      * @return this Moment instance for chainability.
      */
@@ -174,7 +176,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the minutes. The returned value is always in range from 0 to 59.
-     * 
+     *
      * @return The minutes. The returned value is always in range from 0 to 59.
      */
     public int minutes() {
@@ -185,7 +187,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the hour of the day.
      * <p>
      * Accepts numbers from 0 to 23. If the range is exceeded, it will bubble up to the days.
-     * 
+     *
      * @param hours hours to set.
      * @return this Moment instance for chainability.
      */
@@ -195,7 +197,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the hour of day. The returned value is always in range from 0 to 23.
-     * 
+     *
      * @return The hour of day. The returned value is always in range from 0 to 23.
      */
     public int hours() {
@@ -206,7 +208,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the day of month.
      * <p>
      * Accepts numbers from 0 to 31. If the range is exceeded, it will bubble up to the months.
-     * 
+     *
      * @param dayOfMonth day of month to set.
      * @return this Moment instance for chainability.
      */
@@ -216,7 +218,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the day of month. The returned value is always in range from 0 to 31.
-     * 
+     *
      * @return The day of month. The returned value is always in range from 0 to 31.
      */
     public int dates() {
@@ -227,7 +229,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the day of week.
      * <p>
      * Accepts numbers from 1 to 7. Sunday is 1, Saturday is 7.
-     * 
+     *
      * @param dayOfWeek day of week to set. Calendar.SUNDAY, Calendar.MONDAY, etc. can be used.
      * @return this Moment instance for chainability.
      */
@@ -237,7 +239,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the day of week. The returned value is always in range from 1 to 7.
-     * 
+     *
      * @return The day of week. The returned value is always in range from 1 to 7.
      */
     public int days() {
@@ -252,7 +254,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Note: Months are zero indexed, so January is month 0.
      * <p>
      * Calendar.JANUARY, Calendar.FEBRUARY, etc. can be used as argument.
-     * 
+     *
      * @param months months to set
      * @return this Moment instance for chainability.
      */
@@ -262,7 +264,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the months. The returned value is always in range from 0 to 11.
-     * 
+     *
      * @return The months. The returned value is always in range from 0 to 11.
      */
     public int months() {
@@ -271,7 +273,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Sets the years.
-     * 
+     *
      * @param years years to set.
      * @return this Moment instance for chainability.
      */
@@ -281,7 +283,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the years.
-     * 
+     *
      * @return The years.
      */
     public int years() {
@@ -292,7 +294,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Sets the day of the year.
      * <p>
      * Accepts numbers from 1 to 366. If the range is exceeded, it will bubble up to the years.
-     * 
+     *
      * @param dayOfYear day of year to set. Accepts numbers from 1 to 366. If the range is exceeded, it will bubble up to the years.
      * @return this Moment instance for chainability.
      */
@@ -302,7 +304,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the day of year. The returned value is always in range from 1 to 366.
-     * 
+     *
      * @return The returned value is always in range from 1 to 366.
      */
     public int dayOfYear() {
@@ -311,13 +313,13 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Sets the given Calendar field to the given value.
-     * 
+     *
      * <pre>
      * {@code
      * Moment moment = Moment.moment().set(Calendar.YEAR, 2012);
      * }
      * </pre>
-     * 
+     *
      * @param calendarField field to set. For example, to update month field, use Calendar.MONTH
      * @param value value to set.
      * @return this Moment instance for chainability.
@@ -328,7 +330,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns the value of the given Calendar field. For example, to get day of month, use Calendar.DAY_OF_MONTH or Calendar.DATE
-     * 
+     *
      * @param calendarField the calendar field whose value will be returned.
      * @return the value of the given Calendar field.
      */
@@ -364,21 +366,21 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * <p>Mutates the original moment by setting it to the start of a unit of time.</p>
-     * 
+     *
      * <pre>
      * moment().startOf(Calendar.YEAR);
      * moment().startOf(Calendar.MONTH);
      * moment().startOf(Calendar.HOUR);
      * </pre>
-     * 
+     *
      * <p>The above methods are essentially the same as the following.</p>
-     * 
+     *
      * <pre>
      * moment().months(0).days(1).hours(0).minutes(0).seconds(0).milliseconds(0);
      * moment().days(1).hours(0).minutes(0).seconds(0).milliseconds(0);
      * moment().minutes(0).seconds(0).milliseconds(0);
      * </pre>
-     * 
+     *
      * @param calendarField unit of time whose start time will be set to this moment instance.
      * @return this Moment instance for chainability.
      */
@@ -419,21 +421,21 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * <p>Mutates the original moment by setting it to the end of a unit of time.</p>
-     * 
+     *
      * <pre>
      * moment().endOf(Calendar.YEAR);
      * moment().endOf(Calendar.MONTH);
      * moment().endOf(Calendar.HOUR);
      * </pre>
-     * 
+     *
      * <p>The above methods are essentially the same as the following.</p>
-     * 
+     *
      * <pre>
      * moment().months(11).days(31).hours(23).minutes(59).seconds(59).milliseconds(999);
      * moment().days(31).hours(23).minutes(59).seconds(59).milliseconds(999);
      * moment().minutes(59).seconds(59).milliseconds(999);
      * </pre>
-     * 
+     *
      * @param calendarField unit of time whose end time will be set to this moment instance.
      * @return this Moment instance for chainability.
      */
@@ -449,11 +451,11 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Returns the String representation of this moment instance in given date pattern.
      * The pattern must obey java.text.SimpleDateFormat's rules.
      * <p>
-     * 
+     *
      * <pre>
      * moment().format("yyyy/MM/dd HH:mm:ss.SSS");
      * </pre>
-     * 
+     *
      * @param pattern the pattern which will be used to format the date
      * @return the String representation of this moment instance in given date pattern.
      */
@@ -468,7 +470,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns a Date object which is created by using date and time of this moment instance
-     * 
+     *
      * @return a Date object which is created by using date and time of this moment instance
      * @see java.util.Date
      * @see java.util.Calendar#getTime()
@@ -479,7 +481,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns a Calendar object which is created by using date and time of this moment instance
-     * 
+     *
      * @return a Calendar object which is created by using date and time of this moment instance
      * @see java.util.Calendar
      */
@@ -488,7 +490,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * 
+     *
      * @return the array of values
      */
     public int[] toArray() {
@@ -505,7 +507,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns this Moment's time value in milliseconds.
-     * 
+     *
      * @return the time as UTC milliseconds from the epoch.
      * @see java.util.Date#getTime()
      * @see java.util.Calendar#getTimeInMillis()
@@ -518,7 +520,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Returns this Moment's time value in seconds.
      * <p>
      * Simply divides milliseconds to 1000.
-     * 
+     *
      * @return the time as UTC seconds from the epoch.
      * @see java.util.Date#getTime()
      * @see java.util.Calendar#getTimeInMillis()
@@ -529,7 +531,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a new Moment instance by copying this Moment instance's time value.
-     * 
+     *
      * @return a new Moment instance which is created by copying this Moment instance's time value.
      * @see Moment#moment(Moment)
      */
@@ -540,7 +542,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before the specified moment instance
-     *  
+     *
      * @param moment moment to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly earlier than the instant represented by the given moment parameter;
@@ -553,7 +555,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before the specified date instance
-     *  
+     *
      * @param date date to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly earlier than the instant represented by the given date parameter;
@@ -566,7 +568,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before the specified calendar instance
-     *  
+     *
      * @param calendar calendar to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly earlier than the instant represented by the given calendar parameter;
@@ -579,7 +581,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before the specified time as UTC milliseconds from the epoch.
-     *  
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly earlier than the instant represented by the given long parameter;
@@ -591,9 +593,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before the specified moment instance with the given precision. 
+     * Returns true if this moment instance is before the specified moment instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param moment moment instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before the specified moment instance with the given precision.
@@ -604,9 +606,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before the specified date instance with the given precision. 
+     * Returns true if this moment instance is before the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param date date instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before the specified date instance with the given precision.
@@ -617,9 +619,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before the specified calendar instance with the given precision. 
+     * Returns true if this moment instance is before the specified calendar instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param calendar calendar instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before the specified calendar instance with the given precision.
@@ -630,9 +632,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before the specified time as UTC milliseconds from the epoch with the given precision. 
+     * Returns true if this moment instance is before the specified time as UTC milliseconds from the epoch with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before the specified time as UTC milliseconds from the epoch with the given precision.
@@ -644,7 +646,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after the specified moment instance
-     *  
+     *
      * @param moment moment to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly later than the instant represented by the given moment parameter;
@@ -657,7 +659,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after the specified date instance
-     *  
+     *
      * @param date date to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly later than the instant represented by the given date parameter;
@@ -670,7 +672,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after the specified calendar instance
-     *  
+     *
      * @param calendar calendar to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly later than the instant represented by the given calendar parameter;
@@ -683,7 +685,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after the specified time as UTC milliseconds from the epoch
-     *  
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly later than the instant represented by the given time as UTC milliseconds from the epoch;
@@ -695,9 +697,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after the specified moment instance with the given precision. 
+     * Returns true if this moment instance is after the specified moment instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param moment moment instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after the specified moment instance with the given precision.
@@ -708,9 +710,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after the specified date instance with the given precision. 
+     * Returns true if this moment instance is after the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param date date instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after the specified date instance with the given precision.
@@ -721,9 +723,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this calendar instance is after the specified date instance with the given precision. 
+     * Returns true if this calendar instance is after the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param calendar calendar instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after the specified calendar instance with the given precision.
@@ -734,9 +736,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after the specified time as UTC milliseconds from the epoch with the given precision. 
+     * Returns true if this moment instance is after the specified time as UTC milliseconds from the epoch with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after the specified time as UTC milliseconds from the epoch with the given precision.
@@ -747,11 +749,11 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Compares this object with the specified object for order. Returns a negative integer, zero, or a positive 
+     * Compares this object with the specified object for order. Returns a negative integer, zero, or a positive
      * integer as this moment instance is before, equal to, or after the specified moment instance.
-     * 
+     *
      * @param moment the moment instance to compare to this moment instance
-     * @return a negative integer, zero, or a positive integer as this moment instance is before, equal to, or after the specified moment instance. 
+     * @return a negative integer, zero, or a positive integer as this moment instance is before, equal to, or after the specified moment instance.
      * @see java.lang.Comparable#compareTo(Object)
      * @see Moment#isAfter(Moment)
      * @see Moment#isBefore(Moment)
@@ -763,7 +765,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is the same as the specified moment instance
-     *  
+     *
      * @param moment moment to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly the same as the instant represented by the given moment parameter;
@@ -776,7 +778,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is the same as the specified date instance
-     *  
+     *
      * @param date date to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly the same as the instant represented by the given date parameter;
@@ -789,7 +791,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is the same as the specified calendar instance
-     *  
+     *
      * @param calendar calendar to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly the same as the instant represented by the given calendar parameter;
@@ -802,7 +804,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is the same as the specified time as UTC milliseconds from the epoch
-     *  
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is strictly the same as the instant represented by the given time as UTC milliseconds from the epoch;
@@ -814,9 +816,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is the same as the specified moment instance with the given precision. 
+     * Returns true if this moment instance is the same as the specified moment instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param moment moment instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is the same as the specified moment instance with the given precision.
@@ -827,9 +829,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is the same as the specified date instance with the given precision. 
+     * Returns true if this moment instance is the same as the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param date date instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is the same as the specified date instance with the given precision.
@@ -840,9 +842,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is the same as the specified calendar instance with the given precision. 
+     * Returns true if this moment instance is the same as the specified calendar instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param calendar calendar instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is the same as the specified calendar instance with the given precision.
@@ -853,9 +855,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * Returns true if this moment instance is the same as the specified time as UTC milliseconds from the epoch with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is the same as the specified time as UTC milliseconds from the epoch with the given precision.
@@ -867,7 +869,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before or the same as the specified moment instance
-     *  
+     *
      * @param moment moment to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is before or the same as the instant represented by the given moment parameter;
@@ -881,7 +883,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before or the same as the specified date instance
-     *  
+     *
      * @param date date to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is before or the same as the instant represented by the given date parameter;
@@ -895,7 +897,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before or the same as the specified calendar instance
-     *  
+     *
      * @param calendar calendar to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is before or the same as the instant represented by the given calendar parameter;
@@ -909,7 +911,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch
-     *  
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is before or the same as the instant represented by the given time as UTC milliseconds from the epoch;
@@ -922,9 +924,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before or the same as the specified moment instance with the given precision. 
+     * Returns true if this moment instance is before or the same as the specified moment instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param moment moment instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before or the same as the specified moment instance with the given precision.
@@ -936,9 +938,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before or the same as the specified date instance with the given precision. 
+     * Returns true if this moment instance is before or the same as the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param date date instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before or the same as the specified date instance with the given precision.
@@ -950,9 +952,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before or the same as the specified calendar instance with the given precision. 
+     * Returns true if this moment instance is before or the same as the specified calendar instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param calendar calendar instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before or the same as the specified calendar instance with the given precision.
@@ -964,9 +966,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * Returns true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is before or the same as the specified time as UTC milliseconds from the epoch with the given precision.
@@ -979,7 +981,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after or the same as the specified moment instance
-     *  
+     *
      * @param moment moment to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is after or the same as the instant represented by the given moment parameter;
@@ -993,7 +995,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after or the same as the specified date instance
-     *  
+     *
      * @param date date to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is after or the same as the instant represented by the given date parameter;
@@ -1007,7 +1009,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after or the same as the specified calendar instance
-     *  
+     *
      * @param calendar calendar to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is after or the same as the instant represented by the given calendar parameter;
@@ -1021,7 +1023,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch
-     *  
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to check
      * @return <code>true</code> if and only if the instant of time represented by this <tt>Moment</tt>
      * object is after or the same as the instant represented by the given time as UTC milliseconds from the epoch;
@@ -1034,9 +1036,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after or the same as the specified moment instance with the given precision. 
+     * Returns true if this moment instance is after or the same as the specified moment instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param moment moment instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after or the same as the specified moment instance with the given precision.
@@ -1048,9 +1050,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after or the same as the specified date instance with the given precision. 
+     * Returns true if this moment instance is after or the same as the specified date instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param date date instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after or the same as the specified date instance with the given precision.
@@ -1062,9 +1064,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after or the same as the specified calendar instance with the given precision. 
+     * Returns true if this moment instance is after or the same as the specified calendar instance with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param calendar calendar instance to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after or the same as the specified calendar instance with the given precision.
@@ -1076,9 +1078,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Returns true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch with the given precision. 
+     * Returns true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch with the given precision.
      * The second parameter determines the precision, and not just a single value to check, using <code>Calendar.DATE</code> will check for year, month and day.
-     * 
+     *
      * @param milliseconds time as UTC milliseconds from the epoch to compare with this moment instance.
      * @param calendarField the precision. For example, using <code>Calendar.DATE</code> will check for year, month and day.
      * @return true if this moment instance is after or the same as the specified time as UTC milliseconds from the epoch with the given precision.
@@ -1092,7 +1094,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two moment instances.
      * <p>
-     * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two moment instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
@@ -1109,7 +1111,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two date instances.
      * <p>
-     * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two date instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
@@ -1126,7 +1128,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two calendar instances.
      * <p>
-     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
@@ -1143,7 +1145,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two times as UTC milliseconds from the epoch.
      * <p>
-     * A moment instance is between the two milliseconds <code>from</code> and <code>to</code> 
+     * A moment instance is between the two milliseconds <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to) == moment.isAfter(from) &amp;&amp; moment.isBefore(to)</code>
@@ -1160,7 +1162,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two moment instances with the given precision.
      * <p>
-     * A moment instance is between the two moment instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two moment instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
@@ -1178,7 +1180,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two date instances with the given precision.
      * <p>
-     * A moment instance is between the two date instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two date instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
@@ -1196,7 +1198,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two calendar instances with the given precision.
      * <p>
-     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code> 
+     * A moment instance is between the two calendar instances <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
@@ -1214,7 +1216,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns true if this moment instance is between the given two times as UTC milliseconds from the epoch with the given precision.
      * <p>
-     * A moment instance is between the two times as UTC milliseconds from the epoch <code>from</code> and <code>to</code> 
+     * A moment instance is between the two times as UTC milliseconds from the epoch <code>from</code> and <code>to</code>
      * if and only if it is after <code>from</code> and before <code>to</code>.
      * <p>
      * <code>moment.isBetween(from, to, Calendar.DATE) == moment.isAfter(from, Calendar.DATE) &amp;&amp; moment.isBefore(to, Calendar.DATE)</code>
@@ -1231,7 +1233,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if that year is a leap year, and false if it is not.
-     * 
+     *
      * @return true if that year is a leap year, and false if it is not.
      */
     public boolean isLeapYear() {
@@ -1270,7 +1272,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns the maximum (most distant future) of the given moment instances.
      * @param moments moment instances to compare in order to find the maximum (most distant future) one.
-     * @return the maximum (most distant future) of the given moment instances. 
+     * @return the maximum (most distant future) of the given moment instances.
      * If the given <code>moments</code> parameter is null or empty, returns the current date.
      * @see Moment#compareTo(Moment)
      * @see Moment#min(Moment...)
@@ -1293,7 +1295,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Returns the minimum (most distant past) of the given moment instances.
      * @param moments moment instances to compare in order to find the minimum (most distant past) one.
-     * @return the minimum (most distant past) of the given moment instances. 
+     * @return the minimum (most distant past) of the given moment instances.
      * If the given <code>moments</code> parameter is null or empty, returns the current date.
      * @see Moment#compareTo(Moment)
      * @see Moment#max(Moment...)
@@ -1315,7 +1317,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Returns true if the given year is a leap year, and false if it is not.
-     * 
+     *
      * @param year year to control if it is leap or not
      * @return true if the given year is a leap year, and false if it is not.
      */
@@ -1333,7 +1335,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance for given date as string which will be parsed with given pattern
-     * 
+     *
      * @param dateString date as string to be parsed and encapsulated
      * @param pattern pattern to be used to parse the dateString
      * @return a new moment instance for given date as string which will be parsed with given pattern
@@ -1343,9 +1345,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Creates a moment instance by encapsulating the given calendar instance. 
+     * Creates a moment instance by encapsulating the given calendar instance.
      * The given calendar is cloned. The operations on this moment have no effect on the given calendar instance.
-     * 
+     *
      * @param calendar calendar to be cloned and encapsulated
      * @return a new moment instance created by encapsulating the given calendar instance.
      */
@@ -1354,9 +1356,9 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     }
 
     /**
-     * Creates a moment instance by using the given date. The date parameter is copied. 
+     * Creates a moment instance by using the given date. The date parameter is copied.
      * The operations on this moment have no effect on the given date instance.
-     * 
+     *
      * @param date date to be used by this Moment instance.
      * @return a new moment instance created by using the given date. The date parameter is copied.
      */
@@ -1366,7 +1368,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance by using the given time as UTC milliseconds from the epoch.
-     * 
+     *
      * @param timeInMillis time as UTC milliseconds from the epoch.
      * @return a new moment instance created by using the given time as UTC milliseconds from the epoch.
      */
@@ -1376,20 +1378,20 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a moment instance by using the given array of values.
-     * <p> 
+     * <p>
      * The array must contain exactly 7 integers, which represents years, months, days, hours, minutes, seconds, and milliseconds.
      * <p>
      * For example, the following code can be used to create 31/01/2015 13:32:25.125
-     * 
+     *
      * <pre>
      * {@code
      * int[] arrayOfIntegers = new int[] {2015, 0, 31, 13, 32, 25, 125};
      * Moment moment = Moment.moment(arrayOfIntegers);
      * }
      * </pre>
-     * 
+     *
      * Note that the first month in Java(January) is represented by 0.
-     * 
+     *
      * @param array array of values. The array must contain exactly 7 integers, which represents years, months, days, hours, minutes, seconds, and milliseconds.
      * @return a new moment instance created by using the given array of values.
      */
@@ -1399,7 +1401,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 
     /**
      * Creates a new Moment instance by copying the given moment instance's time value.
-     * 
+     *
      * @param source the moment instance to be copied to the new moment instance.
      * @return a new Moment instance which is created by copying the given instance's time value.
      * @see Moment#clone()

@@ -12,6 +12,7 @@ import static org.junit.Assert.assertThat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.asosyalbebe.moment4j.fault.MomentException;
 import org.junit.Test;
 
 public class MomentConstructionTest {
