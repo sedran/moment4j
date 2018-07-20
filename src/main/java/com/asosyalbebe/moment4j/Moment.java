@@ -16,6 +16,7 @@ import java.util.Date;
  * @author Serdar Kuzucu
  *
  */
+@SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
 public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     private static final long serialVersionUID = 1L;
 
@@ -75,7 +76,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
     /**
      * Creates a moment instance by using the given unix timestamp
      *
-     * @param timeInMillis
+     * @param timeInMillis time in milliseconds
      */
     private Moment(long timeInMillis) {
 	this();
@@ -98,7 +99,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      *
      * Note that the first month in Java(January) is represented by 0.
      *
-     * @param array
+     * @param array array of 7 integers containing years, months, days, hours, minutes, seconds, and milliseconds
      */
     private Moment(int[] array) {
 	this();
