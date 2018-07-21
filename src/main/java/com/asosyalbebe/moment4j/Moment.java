@@ -407,6 +407,10 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
 		this.seconds(0);
 	    case Calendar.SECOND:
 		this.milliseconds(0);
+	    case Calendar.MILLISECOND:
+	        break;
+	    default:
+	        throw new MomentException("Unknown calendarField: " + calendarField);
 	}
 
 	if (calendarField == Calendar.WEEK_OF_MONTH || calendarField == Calendar.WEEK_OF_YEAR) {

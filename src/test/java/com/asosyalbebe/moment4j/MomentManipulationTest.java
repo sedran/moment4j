@@ -1,11 +1,13 @@
 package com.asosyalbebe.moment4j;
 
-import static com.asosyalbebe.moment4j.Moment.moment;
-import static org.junit.Assert.assertEquals;
+import com.asosyalbebe.moment4j.fault.MomentException;
+import org.junit.Test;
 
 import java.util.Calendar;
 
-import org.junit.Test;
+import static com.asosyalbebe.moment4j.Moment.moment;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class MomentManipulationTest {
 
@@ -231,6 +233,21 @@ public class MomentManipulationTest {
 	Moment expected = moment(date, dateFormat);
 
 	assertEquals(expected.valueOf(), moment.valueOf());
+    }
+
+    @Test
+    public void test_startOf_UnknownCalendarField() {
+	String dateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+	String date = "2016-03-15 23:36:12.532";
+
+	Moment moment = moment(date, dateFormat);
+
+	try {
+	    moment.startOf(40182);
+	    fail("Should not allow using Moment#startOf with unknown calendar field");
+	} catch (MomentException e) {
+	    assertEquals("Unknown calendarField: 40182", e.getMessage());
+	}
     }
 
     // End of
