@@ -6,6 +6,10 @@ package com.asosyalbebe.moment4j.util;
  * @author Serdar Kuzucu
  */
 public class FormatUtils {
+    private FormatUtils() {
+	// Prevent new instances of utility class
+    }
+
     /**
      * Converts an integer value to string by padding with a single zero if the value is less than 10
      *
