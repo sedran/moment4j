@@ -33,7 +33,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * Creates a moment instance for current time
      */
     private Moment() {
-	this.calendar = Calendar.getInstance();
+        this.calendar = Calendar.getInstance();
     }
 
     /**
@@ -43,15 +43,15 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @param pattern    pattern to be used to parse the dateString
      */
     private Moment(String dateString, String pattern) {
-	Date date;
-	try {
-	    SimpleDateFormat format = new SimpleDateFormat(pattern);
-	    date = format.parse(dateString);
-	} catch (Exception e) {
-	    throw new MomentException("Parse error occurred while parsing [" + dateString + "] with SimpleDateFormat [" + pattern + "]", e);
-	}
-	this.calendar = Calendar.getInstance();
-	this.calendar.setTime(date);
+        Date date;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            date = format.parse(dateString);
+        } catch (Exception e) {
+            throw new MomentException("Parse error occurred while parsing [" + dateString + "] with SimpleDateFormat [" + pattern + "]", e);
+        }
+        this.calendar = Calendar.getInstance();
+        this.calendar.setTime(date);
     }
 
     /**
@@ -61,7 +61,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @param calendar calendar to be cloned and encapsulated
      */
     private Moment(Calendar calendar) {
-	this.calendar = (Calendar) calendar.clone();
+        this.calendar = (Calendar) calendar.clone();
     }
 
     /**
@@ -71,8 +71,8 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @param date date to be used by this Moment instance.
      */
     private Moment(Date date) {
-	this();
-	this.calendar.setTimeInMillis(date.getTime());
+        this();
+        this.calendar.setTimeInMillis(date.getTime());
     }
 
     /**
@@ -81,8 +81,8 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @param timeInMillis time in milliseconds
      */
     private Moment(long timeInMillis) {
-	this();
-	this.calendar.setTimeInMillis(timeInMillis);
+        this();
+        this.calendar.setTimeInMillis(timeInMillis);
     }
 
     /**
@@ -104,23 +104,23 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @param array array of 7 integers containing years, months, days, hours, minutes, seconds, and milliseconds
      */
     private Moment(int[] array) {
-	this();
+        this();
 
-	if (array == null) {
-	    throw new MomentException("int[] array parameter cannot be null!");
-	}
+        if (array == null) {
+            throw new MomentException("int[] array parameter cannot be null!");
+        }
 
-	if (array.length != 7) {
-	    throw new MomentException("int[] array must have exactly 7 elements! You provided " + array.length);
-	}
+        if (array.length != 7) {
+            throw new MomentException("int[] array must have exactly 7 elements! You provided " + array.length);
+        }
 
-	this.calendar.set(Calendar.YEAR, array[0]);
-	this.calendar.set(Calendar.MONTH, array[1]);
-	this.calendar.set(Calendar.DAY_OF_MONTH, array[2]);
-	this.calendar.set(Calendar.HOUR_OF_DAY, array[3]);
-	this.calendar.set(Calendar.MINUTE, array[4]);
-	this.calendar.set(Calendar.SECOND, array[5]);
-	this.calendar.set(Calendar.MILLISECOND, array[6]);
+        this.calendar.set(Calendar.YEAR, array[0]);
+        this.calendar.set(Calendar.MONTH, array[1]);
+        this.calendar.set(Calendar.DAY_OF_MONTH, array[2]);
+        this.calendar.set(Calendar.HOUR_OF_DAY, array[3]);
+        this.calendar.set(Calendar.MINUTE, array[4]);
+        this.calendar.set(Calendar.SECOND, array[5]);
+        this.calendar.set(Calendar.MILLISECOND, array[6]);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment milliseconds(int milliseconds) {
-	return updateCalendarField(Calendar.MILLISECOND, milliseconds);
+        return updateCalendarField(Calendar.MILLISECOND, milliseconds);
     }
 
     /**
@@ -141,7 +141,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The milliseconds. The returned value is always in range from 0 to 999.
      */
     public int milliseconds() {
-	return this.calendar.get(Calendar.MILLISECOND);
+        return this.calendar.get(Calendar.MILLISECOND);
     }
 
     /**
@@ -153,7 +153,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment seconds(int seconds) {
-	return updateCalendarField(Calendar.SECOND, seconds);
+        return updateCalendarField(Calendar.SECOND, seconds);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The seconds. The returned value is always in range from 0 to 59.
      */
     public int seconds() {
-	return this.calendar.get(Calendar.SECOND);
+        return this.calendar.get(Calendar.SECOND);
     }
 
     /**
@@ -174,7 +174,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment minutes(int minutes) {
-	return updateCalendarField(Calendar.MINUTE, minutes);
+        return updateCalendarField(Calendar.MINUTE, minutes);
     }
 
     /**
@@ -183,7 +183,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The minutes. The returned value is always in range from 0 to 59.
      */
     public int minutes() {
-	return this.calendar.get(Calendar.MINUTE);
+        return this.calendar.get(Calendar.MINUTE);
     }
 
     /**
@@ -195,7 +195,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment hours(int hours) {
-	return updateCalendarField(Calendar.HOUR_OF_DAY, hours);
+        return updateCalendarField(Calendar.HOUR_OF_DAY, hours);
     }
 
     /**
@@ -204,7 +204,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The hour of day. The returned value is always in range from 0 to 23.
      */
     public int hours() {
-	return this.calendar.get(Calendar.HOUR_OF_DAY);
+        return this.calendar.get(Calendar.HOUR_OF_DAY);
     }
 
     /**
@@ -216,7 +216,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment dates(int dayOfMonth) {
-	return updateCalendarField(Calendar.DAY_OF_MONTH, dayOfMonth);
+        return updateCalendarField(Calendar.DAY_OF_MONTH, dayOfMonth);
     }
 
     /**
@@ -225,7 +225,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The day of month. The returned value is always in range from 0 to 31.
      */
     public int dates() {
-	return this.calendar.get(Calendar.DAY_OF_MONTH);
+        return this.calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
@@ -237,7 +237,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment days(int dayOfWeek) {
-	return updateCalendarField(Calendar.DAY_OF_WEEK, dayOfWeek);
+        return updateCalendarField(Calendar.DAY_OF_WEEK, dayOfWeek);
     }
 
     /**
@@ -246,7 +246,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The day of week. The returned value is always in range from 1 to 7.
      */
     public int days() {
-	return this.calendar.get(Calendar.DAY_OF_WEEK);
+        return this.calendar.get(Calendar.DAY_OF_WEEK);
     }
 
     /**
@@ -262,7 +262,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment months(int months) {
-	return updateCalendarField(Calendar.MONTH, months);
+        return updateCalendarField(Calendar.MONTH, months);
     }
 
     /**
@@ -271,7 +271,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The months. The returned value is always in range from 0 to 11.
      */
     public int months() {
-	return this.calendar.get(Calendar.MONTH);
+        return this.calendar.get(Calendar.MONTH);
     }
 
     /**
@@ -281,7 +281,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment years(int years) {
-	return updateCalendarField(Calendar.YEAR, years);
+        return updateCalendarField(Calendar.YEAR, years);
     }
 
     /**
@@ -290,7 +290,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The years.
      */
     public int years() {
-	return this.calendar.get(Calendar.YEAR);
+        return this.calendar.get(Calendar.YEAR);
     }
 
     /**
@@ -302,7 +302,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment dayOfYear(int dayOfYear) {
-	return updateCalendarField(Calendar.DAY_OF_YEAR, dayOfYear);
+        return updateCalendarField(Calendar.DAY_OF_YEAR, dayOfYear);
     }
 
     /**
@@ -311,7 +311,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return The returned value is always in range from 1 to 366.
      */
     public int dayOfYear() {
-	return this.calendar.get(Calendar.DAY_OF_YEAR);
+        return this.calendar.get(Calendar.DAY_OF_YEAR);
     }
 
     /**
@@ -328,7 +328,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment set(int calendarField, int value) {
-	return updateCalendarField(calendarField, value);
+        return updateCalendarField(calendarField, value);
     }
 
     /**
@@ -338,7 +338,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return the value of the given Calendar field.
      */
     public int get(int calendarField) {
-	return this.calendar.get(calendarField);
+        return this.calendar.get(calendarField);
     }
 
     /**
@@ -351,7 +351,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment add(int value, int calendarField) {
-	return addCalendarField(calendarField, value);
+        return addCalendarField(calendarField, value);
     }
 
     /**
@@ -364,7 +364,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment subtract(int value, int calendarField) {
-	return addCalendarField(calendarField, -value);
+        return addCalendarField(calendarField, -value);
     }
 
     /**
@@ -388,42 +388,42 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment startOf(int calendarField) {
-	switch (calendarField) {
-	    case Calendar.YEAR:
-		this.months(0);
-	    case Calendar.MONTH:
-		this.dates(1);
-	    case Calendar.WEEK_OF_YEAR:
-	    case Calendar.WEEK_OF_MONTH:
-	    case Calendar.DAY_OF_MONTH:
-	    case Calendar.DAY_OF_WEEK:
-	    case Calendar.DAY_OF_WEEK_IN_MONTH:
-	    case Calendar.DAY_OF_YEAR:
-		this.hours(0);
-	    case Calendar.HOUR:
-	    case Calendar.HOUR_OF_DAY:
-		this.minutes(0);
-	    case Calendar.MINUTE:
-		this.seconds(0);
-	    case Calendar.SECOND:
-		this.milliseconds(0);
-	    case Calendar.MILLISECOND:
-	        break;
-	    default:
-	        throw new MomentException("Unknown calendarField: " + calendarField);
-	}
+        switch (calendarField) {
+            case Calendar.YEAR:
+                this.months(0);
+            case Calendar.MONTH:
+                this.dates(1);
+            case Calendar.WEEK_OF_YEAR:
+            case Calendar.WEEK_OF_MONTH:
+            case Calendar.DAY_OF_MONTH:
+            case Calendar.DAY_OF_WEEK:
+            case Calendar.DAY_OF_WEEK_IN_MONTH:
+            case Calendar.DAY_OF_YEAR:
+                this.hours(0);
+            case Calendar.HOUR:
+            case Calendar.HOUR_OF_DAY:
+                this.minutes(0);
+            case Calendar.MINUTE:
+                this.seconds(0);
+            case Calendar.SECOND:
+                this.milliseconds(0);
+            case Calendar.MILLISECOND:
+                break;
+            default:
+                throw new MomentException("Unknown calendarField: " + calendarField);
+        }
 
-	if (calendarField == Calendar.WEEK_OF_MONTH || calendarField == Calendar.WEEK_OF_YEAR) {
-	    this.days(1);
-	}
+        if (calendarField == Calendar.WEEK_OF_MONTH || calendarField == Calendar.WEEK_OF_YEAR) {
+            this.days(1);
+        }
 
-	if (calendarField == Calendar.DAY_OF_WEEK_IN_MONTH) {
-	    int dayOfWeekInMonth = this.calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-	    this.dates(0);
-	    this.calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, dayOfWeekInMonth);
-	}
+        if (calendarField == Calendar.DAY_OF_WEEK_IN_MONTH) {
+            int dayOfWeekInMonth = this.calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+            this.dates(0);
+            this.calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, dayOfWeekInMonth);
+        }
 
-	return this;
+        return this;
     }
 
     /**
@@ -447,11 +447,11 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return this Moment instance for chainability.
      */
     public Moment endOf(int calendarField) {
-	if (calendarField == Calendar.MILLISECOND) {
-	    return this;
-	}
+        if (calendarField == Calendar.MILLISECOND) {
+            return this;
+        }
 
-	return this.startOf(calendarField).add(1, calendarField).subtract(1, Calendar.MILLISECOND);
+        return this.startOf(calendarField).add(1, calendarField).subtract(1, Calendar.MILLISECOND);
     }
 
     /**
@@ -467,12 +467,12 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return the String representation of this moment instance in given date pattern.
      */
     public String format(String pattern) {
-	try {
-	    SimpleDateFormat format = new SimpleDateFormat(pattern);
-	    return format.format(calendar.getTime());
-	} catch (Exception e) {
-	    throw new MomentException("Parse error occurred while formatting [" + calendar + "] with SimpleDateFormat [" + pattern + "]", e);
-	}
+        try {
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            return format.format(calendar.getTime());
+        } catch (Exception e) {
+            throw new MomentException("Parse error occurred while formatting [" + calendar + "] with SimpleDateFormat [" + pattern + "]", e);
+        }
     }
 
     /**
@@ -483,7 +483,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Calendar#getTime()
      */
     public Date toDate() {
-	return this.calendar.getTime();
+        return this.calendar.getTime();
     }
 
     /**
@@ -493,22 +493,22 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Calendar
      */
     public Calendar toCalendar() {
-	return (Calendar) this.calendar.clone();
+        return (Calendar) this.calendar.clone();
     }
 
     /**
      * @return the array of values
      */
     public int[] toArray() {
-	int[] array = new int[7];
-	array[0] = this.calendar.get(Calendar.YEAR);
-	array[1] = this.calendar.get(Calendar.MONTH);
-	array[2] = this.calendar.get(Calendar.DAY_OF_MONTH);
-	array[3] = this.calendar.get(Calendar.HOUR_OF_DAY);
-	array[4] = this.calendar.get(Calendar.MINUTE);
-	array[5] = this.calendar.get(Calendar.SECOND);
-	array[6] = this.calendar.get(Calendar.MILLISECOND);
-	return array;
+        int[] array = new int[7];
+        array[0] = this.calendar.get(Calendar.YEAR);
+        array[1] = this.calendar.get(Calendar.MONTH);
+        array[2] = this.calendar.get(Calendar.DAY_OF_MONTH);
+        array[3] = this.calendar.get(Calendar.HOUR_OF_DAY);
+        array[4] = this.calendar.get(Calendar.MINUTE);
+        array[5] = this.calendar.get(Calendar.SECOND);
+        array[6] = this.calendar.get(Calendar.MILLISECOND);
+        return array;
     }
 
     /**
@@ -519,7 +519,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Calendar#getTimeInMillis()
      */
     public long valueOf() {
-	return this.calendar.getTimeInMillis();
+        return this.calendar.getTimeInMillis();
     }
 
     /**
@@ -532,7 +532,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Calendar#getTimeInMillis()
      */
     public long unix() {
-	return valueOf() / 1000;
+        return valueOf() / 1000;
     }
 
     /**
@@ -543,7 +543,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      */
     @Override
     public Moment clone() {
-	return new Moment((Calendar) this.calendar.clone());
+        return new Moment((Calendar) this.calendar.clone());
     }
 
     /**
@@ -556,7 +556,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Moment moment) {
-	return isBefore(moment.valueOf());
+        return isBefore(moment.valueOf());
     }
 
     /**
@@ -569,7 +569,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Date date) {
-	return isBefore(date.getTime());
+        return isBefore(date.getTime());
     }
 
     /**
@@ -582,7 +582,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Calendar calendar) {
-	return isBefore(calendar.getTimeInMillis());
+        return isBefore(calendar.getTimeInMillis());
     }
 
     /**
@@ -595,7 +595,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(long milliseconds) {
-	return this.valueOf() < milliseconds;
+        return this.valueOf() < milliseconds;
     }
 
     /**
@@ -608,7 +608,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Moment moment, int calendarField) {
-	return isBefore(moment.valueOf(), calendarField);
+        return isBefore(moment.valueOf(), calendarField);
     }
 
     /**
@@ -621,7 +621,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Date date, int calendarField) {
-	return isBefore(date.getTime(), calendarField);
+        return isBefore(date.getTime(), calendarField);
     }
 
     /**
@@ -634,7 +634,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(Calendar calendar, int calendarField) {
-	return isBefore(calendar.getTime(), calendarField);
+        return isBefore(calendar.getTime(), calendarField);
     }
 
     /**
@@ -647,7 +647,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#before(Date)
      */
     public boolean isBefore(long milliseconds, int calendarField) {
-	return this.clone().endOf(calendarField).isBefore(milliseconds);
+        return this.clone().endOf(calendarField).isBefore(milliseconds);
     }
 
     /**
@@ -660,7 +660,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Moment moment) {
-	return isAfter(moment.valueOf());
+        return isAfter(moment.valueOf());
     }
 
     /**
@@ -673,7 +673,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Date date) {
-	return isAfter(date.getTime());
+        return isAfter(date.getTime());
     }
 
     /**
@@ -686,7 +686,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Calendar calendar) {
-	return isAfter(calendar.getTimeInMillis());
+        return isAfter(calendar.getTimeInMillis());
     }
 
     /**
@@ -699,7 +699,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(long milliseconds) {
-	return this.valueOf() > milliseconds;
+        return this.valueOf() > milliseconds;
     }
 
     /**
@@ -712,7 +712,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Moment moment, int calendarField) {
-	return isAfter(moment.valueOf(), calendarField);
+        return isAfter(moment.valueOf(), calendarField);
     }
 
     /**
@@ -725,7 +725,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Date date, int calendarField) {
-	return isAfter(date.getTime(), calendarField);
+        return isAfter(date.getTime(), calendarField);
     }
 
     /**
@@ -738,7 +738,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(Calendar calendar, int calendarField) {
-	return isAfter(calendar.getTimeInMillis(), calendarField);
+        return isAfter(calendar.getTimeInMillis(), calendarField);
     }
 
     /**
@@ -751,7 +751,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#after(Date)
      */
     public boolean isAfter(long milliseconds, int calendarField) {
-	return this.clone().startOf(calendarField).isAfter(milliseconds);
+        return this.clone().startOf(calendarField).isAfter(milliseconds);
     }
 
     /**
@@ -766,7 +766,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Moment)
      */
     public int compareTo(Moment moment) {
-	return Long.compare(this.valueOf(), moment.valueOf());
+        return Long.compare(this.valueOf(), moment.valueOf());
     }
 
     /**
@@ -779,7 +779,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Moment moment) {
-	return isSame(moment.valueOf());
+        return isSame(moment.valueOf());
     }
 
     /**
@@ -792,7 +792,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Date date) {
-	return isSame(date.getTime());
+        return isSame(date.getTime());
     }
 
     /**
@@ -805,7 +805,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Calendar calendar) {
-	return isSame(calendar.getTimeInMillis());
+        return isSame(calendar.getTimeInMillis());
     }
 
     /**
@@ -818,7 +818,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(long milliseconds) {
-	return this.valueOf() == milliseconds;
+        return this.valueOf() == milliseconds;
     }
 
     /**
@@ -831,7 +831,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Moment moment, int calendarField) {
-	return this.clone().startOf(calendarField).isSame(moment.clone().startOf(calendarField));
+        return this.clone().startOf(calendarField).isSame(moment.clone().startOf(calendarField));
     }
 
     /**
@@ -844,7 +844,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Date date, int calendarField) {
-	return this.clone().startOf(calendarField).isSame(moment(date).startOf(calendarField));
+        return this.clone().startOf(calendarField).isSame(moment(date).startOf(calendarField));
     }
 
     /**
@@ -857,7 +857,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(Calendar calendar, int calendarField) {
-	return this.clone().startOf(calendarField).isSame(moment(calendar).startOf(calendarField));
+        return this.clone().startOf(calendarField).isSame(moment(calendar).startOf(calendarField));
     }
 
     /**
@@ -870,7 +870,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see java.util.Date#equals(Object)
      */
     public boolean isSame(long milliseconds, int calendarField) {
-	return this.clone().startOf(calendarField).isSame(moment(milliseconds).startOf(calendarField));
+        return this.clone().startOf(calendarField).isSame(moment(milliseconds).startOf(calendarField));
     }
 
     /**
@@ -884,7 +884,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Moment)
      */
     public boolean isSameOrBefore(Moment moment) {
-	return isBefore(moment) || isSame(moment);
+        return isBefore(moment) || isSame(moment);
     }
 
     /**
@@ -898,7 +898,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Date)
      */
     public boolean isSameOrBefore(Date date) {
-	return isBefore(date) || isSame(date);
+        return isBefore(date) || isSame(date);
     }
 
     /**
@@ -912,7 +912,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Calendar)
      */
     public boolean isSameOrBefore(Calendar calendar) {
-	return isBefore(calendar) || isSame(calendar);
+        return isBefore(calendar) || isSame(calendar);
     }
 
     /**
@@ -926,7 +926,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(long)
      */
     public boolean isSameOrBefore(long milliseconds) {
-	return isBefore(milliseconds) || isSame(milliseconds);
+        return isBefore(milliseconds) || isSame(milliseconds);
     }
 
     /**
@@ -940,7 +940,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Moment, int)
      */
     public boolean isSameOrBefore(Moment moment, int calendarField) {
-	return isBefore(moment, calendarField) || isSame(moment, calendarField);
+        return isBefore(moment, calendarField) || isSame(moment, calendarField);
     }
 
     /**
@@ -954,7 +954,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Date, int)
      */
     public boolean isSameOrBefore(Date date, int calendarField) {
-	return isBefore(date, calendarField) || isSame(date, calendarField);
+        return isBefore(date, calendarField) || isSame(date, calendarField);
     }
 
     /**
@@ -968,7 +968,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Calendar, int)
      */
     public boolean isSameOrBefore(Calendar calendar, int calendarField) {
-	return isBefore(calendar, calendarField) || isSame(calendar, calendarField);
+        return isBefore(calendar, calendarField) || isSame(calendar, calendarField);
     }
 
     /**
@@ -982,7 +982,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(long, int)
      */
     public boolean isSameOrBefore(long milliseconds, int calendarField) {
-	return isBefore(milliseconds, calendarField) || isSame(milliseconds, calendarField);
+        return isBefore(milliseconds, calendarField) || isSame(milliseconds, calendarField);
     }
 
     /**
@@ -996,7 +996,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Moment)
      */
     public boolean isSameOrAfter(Moment moment) {
-	return isAfter(moment) || isSame(moment);
+        return isAfter(moment) || isSame(moment);
     }
 
     /**
@@ -1010,7 +1010,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Date)
      */
     public boolean isSameOrAfter(Date date) {
-	return isAfter(date) || isSame(date);
+        return isAfter(date) || isSame(date);
     }
 
     /**
@@ -1024,7 +1024,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Calendar)
      */
     public boolean isSameOrAfter(Calendar calendar) {
-	return isAfter(calendar) || isSame(calendar);
+        return isAfter(calendar) || isSame(calendar);
     }
 
     /**
@@ -1038,7 +1038,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(long)
      */
     public boolean isSameOrAfter(long milliseconds) {
-	return isAfter(milliseconds) || isSame(milliseconds);
+        return isAfter(milliseconds) || isSame(milliseconds);
     }
 
     /**
@@ -1052,7 +1052,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Moment, int)
      */
     public boolean isSameOrAfter(Moment moment, int calendarField) {
-	return isAfter(moment, calendarField) || isSame(moment, calendarField);
+        return isAfter(moment, calendarField) || isSame(moment, calendarField);
     }
 
     /**
@@ -1066,7 +1066,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Date, int)
      */
     public boolean isSameOrAfter(Date date, int calendarField) {
-	return isAfter(date, calendarField) || isSame(date, calendarField);
+        return isAfter(date, calendarField) || isSame(date, calendarField);
     }
 
     /**
@@ -1080,7 +1080,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(Calendar, int)
      */
     public boolean isSameOrAfter(Calendar calendar, int calendarField) {
-	return isAfter(calendar, calendarField) || isSame(calendar, calendarField);
+        return isAfter(calendar, calendarField) || isSame(calendar, calendarField);
     }
 
     /**
@@ -1094,7 +1094,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isSame(long, int)
      */
     public boolean isSameOrAfter(long milliseconds, int calendarField) {
-	return isAfter(milliseconds, calendarField) || isSame(milliseconds, calendarField);
+        return isAfter(milliseconds, calendarField) || isSame(milliseconds, calendarField);
     }
 
     /**
@@ -1112,7 +1112,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Moment)
      */
     public boolean isBetween(Moment from, Moment to) {
-	return isAfter(from) && isBefore(to);
+        return isAfter(from) && isBefore(to);
     }
 
     /**
@@ -1130,7 +1130,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Date)
      */
     public boolean isBetween(Date from, Date to) {
-	return isAfter(from) && isBefore(to);
+        return isAfter(from) && isBefore(to);
     }
 
     /**
@@ -1148,7 +1148,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Calendar)
      */
     public boolean isBetween(Calendar from, Calendar to) {
-	return isAfter(from) && isBefore(to);
+        return isAfter(from) && isBefore(to);
     }
 
     /**
@@ -1166,7 +1166,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(long)
      */
     public boolean isBetween(long fromMillis, long toMillis) {
-	return isAfter(fromMillis) && isBefore(toMillis);
+        return isAfter(fromMillis) && isBefore(toMillis);
     }
 
     /**
@@ -1185,7 +1185,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Moment, int)
      */
     public boolean isBetween(Moment from, Moment to, int calendarField) {
-	return isAfter(from, calendarField) && isBefore(to, calendarField);
+        return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
     /**
@@ -1204,7 +1204,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Date, int)
      */
     public boolean isBetween(Date from, Date to, int calendarField) {
-	return isAfter(from, calendarField) && isBefore(to, calendarField);
+        return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
     /**
@@ -1223,7 +1223,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(Calendar, int)
      */
     public boolean isBetween(Calendar from, Calendar to, int calendarField) {
-	return isAfter(from, calendarField) && isBefore(to, calendarField);
+        return isAfter(from, calendarField) && isBefore(to, calendarField);
     }
 
     /**
@@ -1242,7 +1242,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#isBefore(long, int)
      */
     public boolean isBetween(long fromMillis, long toMillis, int calendarField) {
-	return isAfter(fromMillis, calendarField) && isBefore(toMillis, calendarField);
+        return isAfter(fromMillis, calendarField) && isBefore(toMillis, calendarField);
     }
 
     /**
@@ -1251,36 +1251,36 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return true if that year is a leap year, and false if it is not.
      */
     public boolean isLeapYear() {
-	return isLeapYear(years());
+        return isLeapYear(years());
     }
 
     @Override
     public int hashCode() {
-	Long value = valueOf();
-	return value.hashCode();
+        Long value = valueOf();
+        return value.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Moment other = (Moment) obj;
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Moment other = (Moment) obj;
 
-	return isSame(other);
+        return isSame(other);
     }
 
     private Moment updateCalendarField(int field, int value) {
-	this.calendar.set(field, value);
-	return this;
+        this.calendar.set(field, value);
+        return this;
     }
 
     private Moment addCalendarField(int field, int value) {
-	this.calendar.add(field, value);
-	return this;
+        this.calendar.add(field, value);
+        return this;
     }
 
     /**
@@ -1293,18 +1293,18 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#min(Moment...)
      */
     public static Moment max(Moment... moments) {
-	if (moments == null || moments.length == 0) {
-	    return moment();
-	}
+        if (moments == null || moments.length == 0) {
+            return moment();
+        }
 
-	Moment max = moments[0];
-	for (int i = 1; i < moments.length; i++) {
-	    if (moments[i].valueOf() > max.valueOf()) {
-		max = moments[i];
-	    }
-	}
+        Moment max = moments[0];
+        for (int i = 1; i < moments.length; i++) {
+            if (moments[i].valueOf() > max.valueOf()) {
+                max = moments[i];
+            }
+        }
 
-	return max;
+        return max;
     }
 
     /**
@@ -1317,18 +1317,18 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#max(Moment...)
      */
     public static Moment min(Moment... moments) {
-	if (moments == null || moments.length == 0) {
-	    return moment();
-	}
+        if (moments == null || moments.length == 0) {
+            return moment();
+        }
 
-	Moment min = moments[0];
-	for (int i = 1; i < moments.length; i++) {
-	    if (moments[i].valueOf() < min.valueOf()) {
-		min = moments[i];
-	    }
-	}
+        Moment min = moments[0];
+        for (int i = 1; i < moments.length; i++) {
+            if (moments[i].valueOf() < min.valueOf()) {
+                min = moments[i];
+            }
+        }
 
-	return min;
+        return min;
     }
 
     /**
@@ -1338,7 +1338,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return true if the given year is a leap year, and false if it is not.
      */
     public static boolean isLeapYear(int year) {
-	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
     }
 
     /**
@@ -1347,7 +1347,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance for current time
      */
     public static Moment moment() {
-	return new Moment();
+        return new Moment();
     }
 
     /**
@@ -1358,7 +1358,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance for given date as string which will be parsed with given pattern
      */
     public static Moment moment(String dateString, String pattern) {
-	return new Moment(dateString, pattern);
+        return new Moment(dateString, pattern);
     }
 
     /**
@@ -1369,7 +1369,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance created by encapsulating the given calendar instance.
      */
     public static Moment moment(Calendar calendar) {
-	return new Moment(calendar);
+        return new Moment(calendar);
     }
 
     /**
@@ -1380,7 +1380,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance created by using the given date. The date parameter is copied.
      */
     public static Moment moment(Date date) {
-	return new Moment(date);
+        return new Moment(date);
     }
 
     /**
@@ -1390,7 +1390,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance created by using the given time as UTC milliseconds from the epoch.
      */
     public static Moment moment(long timeInMillis) {
-	return new Moment(timeInMillis);
+        return new Moment(timeInMillis);
     }
 
     /**
@@ -1413,7 +1413,7 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @return a new moment instance created by using the given array of values.
      */
     public static Moment moment(int[] array) {
-	return new Moment(array);
+        return new Moment(array);
     }
 
     /**
@@ -1424,20 +1424,20 @@ public class Moment implements Cloneable, Serializable, Comparable<Moment> {
      * @see Moment#clone()
      */
     public static Moment moment(Moment source) {
-	return new Moment(source.valueOf());
+        return new Moment(source.valueOf());
     }
 
     @Override
     @SuppressWarnings("StringBufferReplaceableByString")
     public String toString() {
-	return new StringBuilder("Moment{ ")
-		.append(get(Calendar.YEAR)).append("/")
-		.append(toTwoDigitsString(get(Calendar.MONTH) + 1)).append("/")
-		.append(toTwoDigitsString(get(Calendar.DAY_OF_MONTH))).append(" ")
-		.append(toTwoDigitsString(get(Calendar.HOUR_OF_DAY))).append(":")
-		.append(toTwoDigitsString(get(Calendar.MINUTE))).append(":")
-		.append(toTwoDigitsString(get(Calendar.SECOND))).append(".")
-		.append(toThreeDigitsString(get(Calendar.MILLISECOND))).append(" }")
-		.toString();
+        return new StringBuilder("Moment{ ")
+                .append(get(Calendar.YEAR)).append("/")
+                .append(toTwoDigitsString(get(Calendar.MONTH) + 1)).append("/")
+                .append(toTwoDigitsString(get(Calendar.DAY_OF_MONTH))).append(" ")
+                .append(toTwoDigitsString(get(Calendar.HOUR_OF_DAY))).append(":")
+                .append(toTwoDigitsString(get(Calendar.MINUTE))).append(":")
+                .append(toTwoDigitsString(get(Calendar.SECOND))).append(".")
+                .append(toThreeDigitsString(get(Calendar.MILLISECOND))).append(" }")
+                .toString();
     }
 }

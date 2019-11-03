@@ -7,7 +7,7 @@ package com.asosyalbebe.moment4j.util;
  */
 public class FormatUtils {
     private FormatUtils() {
-	// Prevent new instances of utility class
+        // Prevent new instances of utility class
     }
 
     /**
@@ -17,11 +17,11 @@ public class FormatUtils {
      * @return string value of the given integer by padding with zero when necessary
      */
     public static String toTwoDigitsString(int value) {
-	final String stringValue = String.valueOf(value);
-	if (value < 10 && value >= 0) {
-	    return "0".concat(stringValue);
-	}
-	return stringValue;
+        final String stringValue = String.valueOf(value);
+        if (value < 10 && value >= 0) {
+            return "0".concat(stringValue);
+        }
+        return stringValue;
     }
 
     /**
@@ -31,18 +31,18 @@ public class FormatUtils {
      * @return string value of the given integer by padding with zero when necessary
      */
     public static String toThreeDigitsString(int value) {
-	final String stringValue = String.valueOf(value);
-	if (value < 0) {
-	    return stringValue;
-	}
+        final String stringValue = String.valueOf(value);
+        if (value < 0) {
+            return stringValue;
+        }
 
-	if (value < 10) {
-	    return "00".concat(stringValue);
-	}
+        if (value < 10) {
+            return "00".concat(stringValue);
+        }
 
-	if (value < 100) {
-	    return "0".concat(stringValue);
-	}
-	return stringValue;
+        if (value < 100) {
+            return "0".concat(stringValue);
+        }
+        return stringValue;
     }
 }
